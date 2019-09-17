@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Handlers;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Str;
 
 class ImageUploadHandler
@@ -13,7 +14,7 @@ class ImageUploadHandler
      * $folder 文件夹名称
      * $file_prefix 文件名前缀，
      * */
-    public function save($file, $folder, $file_prefix)
+    public function save($file, $folder, $file_prefix, $max_width = false)
     {
         //构建存储的文件夹规则，例如 uploads/images/avatars/201709/21
         $folder_name = "uploads/images/{$folder}/" . date("Ym/d", time());
@@ -32,8 +33,29 @@ class ImageUploadHandler
         }
         //将图片移动到我们的存储路径中
         $file->move($upload_path, $filename);
+
+        //如果限制了大小
+        if($max_width && $extension != 'gif'){
+            $this->reduceSize($upload_path . '/' . $filename, $max_width);
+        }
         return [
             'path' => config('app.url') . "/$folder_name/$filename",
         ];
+    }
+
+    public function reduceSize($file_path, $max_width)
+    {
+        //先进行实例化
+        $image = Image::make($file_path);
+
+        //大小调整
+        $image->resize($max_width, null, function ($constraint) {
+           //设定狂赌为$max_width, 等比例缩放
+            $constraint->aspectRatio();
+            //防止图片变大
+            $constraint->upsize();
+        });
+        //对图片修改后进行保存
+        $image->save();
     }
 }
