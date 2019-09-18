@@ -33,6 +33,7 @@ Route::get('email/resend', 'Auth\VerificationController@resend')->name('verifica
 //个人中心相关路由
 Route::resource('users', 'UsersController', ['only' => ['show', 'update', 'edit']]);
 
-
-
+//话题路由
 Route::resource('topics', 'TopicsController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);
+//根据分类来列表话题
+Route::resource('categories', 'CategoriesController',['only' => ['show']]);
