@@ -13,8 +13,9 @@ function category_nav_active($category_id)
 }
 
 //生成文章摘要
-function make_excerpt($value, $lenght=20)
+function make_excerpt($value, $lenght=50)
 {
-    $excerpt = trim(str_replace('/\r\n|\r|\n+/', '', strip_tags($value)));
-    return str_limit($excerpt, $lenght);
+    $excerpt = trim(preg_replace('/\r\n|\r|\n+/', '', strip_tags($value)));
+
+    return mb_substr($excerpt,'0', $lenght).'...';
 }
