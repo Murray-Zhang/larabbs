@@ -59,10 +59,21 @@
     <script type="text/javascript" src="{{ asset('js/hotkeys.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/uploader.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/simditor.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/simditor-dropzone.js') }}"></script>
     <script>
         $(document).ready(function() {
             var editor = new Simditor({
                 textarea: $('#editor'),
+                upload: {
+                    url: '{{ route('topics.upload_image') }}',
+                    params: {
+                        _token: '{{ csrf_token() }}'
+                    },
+                    fileKey: 'upload_file',
+                    connectionCount: 3,
+                    leaveConfirm: '⽂件上传中，关闭此⻚⾯将取消上传。'
+                },
+                pasteImage:true,
             });
         });
     </script>
