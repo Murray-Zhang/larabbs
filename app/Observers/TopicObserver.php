@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Handlers\SlugTranslateHandler;
 use App\Models\Topic;
 
 // creating, created, updating, updated, saving,
@@ -16,5 +17,10 @@ class TopicObserver
         $topic->body = clean($topic->body, 'user_topic_body');
         //自定义的辅助方法
         $topic->excerpt = make_excerpt($topic->body);
+
+        //生成seo友好的url slug
+        if (!$topic->slug) {
+            $topic->slug = (new SlugTranslateHandler())->translate($topic->title);
+        }
     }
 }
