@@ -36,13 +36,16 @@
             {!! $topic->body !!}
           </div>
           <div class="operate">
+            @can('update', $topic)
             <hr>
             <a href="{{ route('topics.edit', $topic->id) }}" class="btn btn-outline-secondary btn-sm" role="button">
               <i class="far fa-edit"></i> 编辑
             </a>
+            @elsecan('destory', $topic)
             <a href="#" class="btn btn-outline-secondary btn-sm" role="button">
               <i class="far fa-trash-alt"></i> 删除
             </a>
+            @endcan
           </div>
         </div>
       </div>
