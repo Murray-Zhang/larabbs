@@ -16,7 +16,7 @@ class TopicsTableSeeder extends Seeder
 
         $faker = app(\Faker\Generator::class);
 
-        $topics = factory(Topic::class, 1000)->make()->each(function ($topic, $index) use ($alluserids,$allcategories,$faker){
+        $topics = factory(Topic::class, 100)->make()->each(function ($topic, $index) use ($alluserids,$allcategories,$faker){
             $topic->user_id = $faker->randomElement($alluserids);
             $topic->category_id = $faker->randomElement($allcategories);
         });
