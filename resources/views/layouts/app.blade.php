@@ -9,7 +9,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'LaraBBS')</title>
     <!-- Styles -->
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+{{--    <link href="{{mix('css/app.css')}}" rel="stylesheet">--}}
+    <link href="http://static.lovezhz.cn/css/app.css" rel="stylesheet">
     @yield('styles')
 </head>
 <body>
@@ -22,7 +23,8 @@
     @include('layouts._footer')
 </div>
 <!-- Scripts -->
-<script src="{{ mix('js/app.js') }}"></script>
+{{--<script src="{{mix('js/app.js')}}"></script>--}}
+<script src="http://static.lovezhz.cn/js/app.js"></script>
 @yield('scripts')
 </body>
 </html>
