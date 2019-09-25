@@ -36,6 +36,11 @@ class UsersTableSeeder extends Seeder
         $user->email = 'zhangsan@qq.com';
         $user->avatar = 'http://larabbs.lovezhz.cn/uploads/images/avatars/201909/17/1_1568718471_xRVqPKnpIS.png';
         $user->save();
+        // 初始化⽤⼾⻆⾊，将 1 号⽤⼾指派为『站⻓』
+        $user->assignRole('Founder');
+        // 将 2 号⽤⼾指派为『管理员』
+        $user = User::find(2);
+        $user->assignRole('Maintainer');
 
 
 
