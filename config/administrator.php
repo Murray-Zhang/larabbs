@@ -33,6 +33,8 @@ return array(
     'menu' => [
         '⽤⼾与权限' => [
             'users',
+            'roles',
+            'permissions',
         ],
     ],
     /*
